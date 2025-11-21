@@ -387,52 +387,34 @@ function FlattenANestedArray(arr) {
 let input_array = [1, [2, 3], [4, [5, 6]]];
 console.log(FlattenANestedArray(input_array));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 16. Find the Longest Word in a Sentence
 // Problem: Write a function that takes a sentence and returns the longest word in it. If there are multiple words with the same maximum length, return the first one that appears.
 
 // Example:
 // Input: "The quick brown fox jumped over the lazy dog"
 // Output: "jumped"
+      function FindtheLongestWord(sentence) {
+    let thelongestWord ="";   
+    let currentWord ="";
 
+    for (let i = 0; i<sentence.length; i++) {
+        let char = sentence[i];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if (char !== " ") {
+            currentWord = currentWord + char;
+        } else {if (currentWord.length > thelongestWord.length) {
+                thelongestWord = currentWord;
+            }
+            currentWord ="";
+        }
+    }
+    if (currentWord.length > thelongestWord.length) {
+        thelongestWord = currentWord;
+    }
+    return thelongestWord;
+}
+            console.log(FindtheLongestWord("The quick brown fox jumped over the lazy dog"));  
+            console.log(FindtheLongestWord("i am learning forntendBeg in FocalXCommunity"));//FocalXCommunity  
 
 
 // 17. Find the Most Frequent Element in an Array
@@ -443,6 +425,34 @@ console.log(FlattenANestedArray(input_array));
 // Output: 2
 // Input: ['a', 'b', 'c', 'a', 'b', 'a']
 // Output: 'a'
+
+function MostFrequentElement(arr) {
+    let maxCount = 0;        // أكبر عدد تكرار
+    let mostElementFrequent = null;  // العنصر الأكثر تكرارًا
+
+    // حلقة على كل عنصر
+    for (let i = 0; i < arr.length; i++) {
+        let currentcount = 0; // عداد للتكرار الحالي
+
+        // نقارن مع باقي العناصر
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[i] === arr[j]) {
+                currentcount+=1;
+            }
+        }
+
+        // إذا كان هذا العنصر أكثر تكرارًا من السابق
+        if (currentcount > maxCount) {
+            maxCount =currentcount;
+            mostElementFrequent = arr[i];
+        }
+    }
+
+    return mostElementFrequent;
+}  
+        console.log(MostFrequentElement([1, 2, 3, 2, 2, 4, 5, 2]));//2
+        console.log(MostFrequentElement(['a', 'b', 'c', 'a', 'b', 'a']));//a
+
 
 
 
@@ -470,52 +480,51 @@ console.log(FlattenANestedArray(input_array));
 // Input: [{ name: "Alice", age: 30 }, { name: "Bob", age: 25 }, { name: "Charlie", age: 35 }]
 // Output: [{ name: "Bob", age: 25 }, { name: "Alice", age: 30 }, { name: "Charlie", age: 35 }]
 // Solution: (Using Bubble Sort algorithm)
+function SortanArrayofObjects(arr) {
+    let n = arr.length;//longOfArray
+    for (let i = 0; i<n - 1; i++) {
+        for (let j = 0; j < n - 1 - i; j++) {
+            if (arr[j].age > arr[j + 1].age) {
+                let t = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = t;
+            }
+        }
+    }
+    return arr;
+}
+//EX
+let person = [
+    { name: "Alice", age: 30 },{ name: "Bob", age: 25 },{ name: "Charlie", age: 35 }
+];
 
+console.log(SortanArrayofObjects(person));//[{ name: 'Bob', age: 25 },{ name: 'Alice', age: 30 },{ name: 'Charlie', age: 35 }]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log("===========================================================================")
 // 19. Find the First Non-Repeating Character
 // Problem: Write a function that takes a string and finds the first character that does not repeat.
-
 // Example:
 // Input: "swiss"
 // Output: "w"
 // Input: "aabbcc"
 // Output: null (or a suitable message)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function FirstNonRepeatingCharacter(str) {
+    for (let i = 0; i<str.length; i++) {
+        let ch = str[i];
+        let count = 0;
+        for (let j = 0; j < str.length; j++) {
+            if (str[j] === ch) {
+                count = count + 1;
+            }
+        }
+        if (count === 1) {
+            return ch;
+        }
+    }
+    return null;
+}
+          console.log(FirstNonRepeatingCharacter("swiss"));//w
+          console.log(FirstNonRepeatingCharacter("aabbcc"));//null
 
 // 20. Symmetric Difference of Two Arrays
 // Problem: Write a function that takes two arrays and returns a new array containing the elements that are present in one of the arrays, but not in both.
@@ -523,4 +532,39 @@ console.log(FlattenANestedArray(input_array));
 // Example:
 // Input: [1, 2, 3], [3, 4, 5]
 // Output: [1, 2, 4, 5]
+
+function SymmetricDifference(arr1, arr2) {
+    let result = [];    
+    let indx = 0;   
+    for (let i = 0; i< arr1.length; i++) {
+        let found = false;
+        for (let j = 0; j< arr2.length; j++) {
+            if (arr1[i]===arr2[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            result[indx] = arr1[i];
+            indx++;
+        }
+    }
+    for (let i = 0; i < arr2.length; i++) {
+        let found = false;
+        for (let j= 0; j< arr1.length; j++) {
+            if (arr2[i] === arr1[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            result[indx] = arr2[i];
+            indx++;
+        }
+    }
+    return result
+}
+console.log(SymmetricDifference([1, 2, 3], [3, 4, 5]));//[ 1, 2, 4, 5 ]
+console.log("END OF THE TASK5")
+
 
