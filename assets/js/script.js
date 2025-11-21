@@ -282,25 +282,26 @@ console.log(FindAPairofNumbers([10, 5, 2, 7, 8, 3], 7))//[ 5, 2 ]
 // Example:
 // Input: [1, 2, 3, 4, 5], 2
 // Output: [3, 4, 5, 1, 2]
+function RotateanArraytotheLeft(arr, n) {
+    let length = arr.length;
+    for (let i = 0; i < n; i++) {
+        let first = arr[0];//1
+        for (let j = 0; j < length - 1; j++) {
+            arr[j] = arr[j + 1];
+            /*
+            i=0,first=1
+            j = 0: arr[0] = arr[1] -> [2, 2, 3, 4, 5]
+            j = 1: arr[1] = arr[2] -> [2, 3, 3, 4, 5]
+            j = 2: arr[2] = arr[3] -> [2, 3, 4, 4, 5]
+            j = 3: arr[3] = arr[4] -> [2, 3, 4, 5, 5]*/    
+        }
+        arr[length - 1] = first;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return arr;
+}
+    arr = [1, 2, 3, 4, 5];
+    console.log(RotateanArraytotheLeft(arr, 2));//[ 3, 4, 5, 1, 2 ]
 
 // 13. Find the Intersection of Two Arrays
 // Problem: Write a function that takes two arrays and returns a new array containing only the elements that are common to both arrays (the intersection).
@@ -309,23 +310,23 @@ console.log(FindAPairofNumbers([10, 5, 2, 7, 8, 3], 7))//[ 5, 2 ]
 // Input: [1, 2, 3, 4], [3, 4, 5, 6]
 // Output: [3, 4]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function FindtheIntersection(arr1,arr2){
+  let score=[];
+  let indx=0;
+  for(let i=0;i<arr1.length;i++){
+    let k=arr1[i];
+    for(let j=0;j<arr2.length;j++)
+    {
+      if(k===arr2[j]){
+        score[indx]=k;
+        indx++;
+        break;
+      }
+    }
+  }
+  return score;
+}
+console.log(FindtheIntersection([1, 2, 3, 4], [3, 4, 5, 6]))
 
 
 // 14. Count Character Frequency in a String
@@ -334,25 +335,22 @@ console.log(FindAPairofNumbers([10, 5, 2, 7, 8, 3], 7))//[ 5, 2 ]
 // Example:
 // Input: "hello"
 // Output: { h: 1, e: 1, l: 2, o: 1 }
+function CountCharacterFrequencyInAString(Str){
+  let obj={};
+  for (let i = 0; i < Str.length; i++) {
+    let ch=Str[i];
+    if(obj[ch]!==undefined){
+      obj[ch]+=1;
+    }
+    else{
+      obj[ch]=1;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
+    
+  }
+  return obj;
+}
+console.log(CountCharacterFrequencyInAString("hello"))//{ h: 1, e: 1, l: 2, o: 1 }
 
 // 15. Flatten a Nested Array
 // Problem: Write a function that flattens a nested array (an array containing elements that may themselves be arrays) into a single, flat array.
@@ -360,6 +358,37 @@ console.log(FindAPairofNumbers([10, 5, 2, 7, 8, 3], 7))//[ 5, 2 ]
 // Example:
 // Input: [1, [2, 3], [4, [5, 6]]]
 // Output: [1, 2, 3, 4, 5, 6]
+
+function FlattenANestedArray(arr) {
+    let result = [];     
+    let indx = 0;
+    for (let i = 0; i < arr.length; i++) {
+        let element = arr[i];
+        if (typeof element === "object") {           
+            for (let j = 0; j < element.length; j++) {
+                let inner = element[j];               
+                if (typeof inner === "object") {
+                    for (let k = 0; k < inner.length; k++) {
+                        result[indx] = inner[k];
+                        indx++;
+                    }
+                } else {
+                    result[indx] = inner;
+                    indx++;
+                }
+            }
+        } else {          
+            result[indx] = element;
+            indx++;
+        }
+    }
+    return result;
+}
+let input_array = [1, [2, 3], [4, [5, 6]]];
+console.log(FlattenANestedArray(input_array));
+
+
+
 
 
 
