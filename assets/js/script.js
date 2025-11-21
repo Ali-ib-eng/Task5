@@ -145,7 +145,7 @@ function findMissingNumber(arr) {
   }
 }
 let numbers=[1,2,4]
-console.log(findMissingNumber(numbers)); //4
+console.log(findMissingNumber(numbers)); //3
 
 
 
@@ -253,50 +253,28 @@ let subarrays = ChunkArray(inputarr, 3);
 console.log("subarrays are:",subarrays);//subarrays are: [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7 ] ]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 11. Find a Pair of Numbers that Sum to a Target Value
 // Problem: Write a function that takes an array of numbers and a target number, and returns the first pair of numbers from the array that sum up to the target.
 
 // Example:
 // Input: [10, 5, 2, 7, 8, 3], 10
 // Output: [2, 8]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function FindAPairofNumbers(arr,target_Num)
+{
+  for(let i=0;i<arr.length;i++)
+  {
+    for (let j = i+1; j < arr.length; j++) {
+      if(arr[i]+arr[j]===target_Num)
+      {
+        return[arr[i],arr[j]];
+      }
+        
+    }
+  }
+  return false;
+}
+console.log(FindAPairofNumbers([10, 5, 2, 7, 8, 3], 10))//[ 2, 8 ]
+console.log(FindAPairofNumbers([10, 5, 2, 7, 8, 3], 7))//[ 5, 2 ]
 
 // 12. Rotate an Array to the Left
 // Problem: Write a function that takes an array and a number n, and rotates the array elements to the left by n positions.
